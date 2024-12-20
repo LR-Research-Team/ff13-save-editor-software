@@ -186,6 +186,8 @@ Partial Class Form1
         Label41 = New Label()
         ListBox8 = New ListBox()
         TabPage1 = New TabPage()
+        wepPointers = New ListBox()
+        accPointers = New ListBox()
         wepAccSave = New Button()
         addAccessory = New Button()
         addWeapon = New Button()
@@ -197,8 +199,7 @@ Partial Class Form1
         WepName = New ListBox()
         AccBox = New ListBox()
         WepBox = New ListBox()
-        WepAccButton = New Button()
-        ListBox9 = New ListBox()
+        ListBox10 = New ListBox()
         TabControl1.SuspendLayout()
         TabPage2.SuspendLayout()
         CType(GilTextValue, ComponentModel.ISupportInitialize).BeginInit()
@@ -1945,7 +1946,9 @@ Partial Class Form1
         ' 
         ' TabPage1
         ' 
-        TabPage1.Controls.Add(ListBox9)
+        TabPage1.Controls.Add(ListBox10)
+        TabPage1.Controls.Add(wepPointers)
+        TabPage1.Controls.Add(accPointers)
         TabPage1.Controls.Add(wepAccSave)
         TabPage1.Controls.Add(addAccessory)
         TabPage1.Controls.Add(addWeapon)
@@ -1957,7 +1960,6 @@ Partial Class Form1
         TabPage1.Controls.Add(WepName)
         TabPage1.Controls.Add(AccBox)
         TabPage1.Controls.Add(WepBox)
-        TabPage1.Controls.Add(WepAccButton)
         TabPage1.Location = New Point(4, 24)
         TabPage1.Name = "TabPage1"
         TabPage1.Padding = New Padding(3)
@@ -1966,9 +1968,29 @@ Partial Class Form1
         TabPage1.Text = "Weapons & Accessories"
         TabPage1.UseVisualStyleBackColor = True
         ' 
+        ' wepPointers
+        ' 
+        wepPointers.FormattingEnabled = True
+        wepPointers.ItemHeight = 15
+        wepPointers.Location = New Point(703, 219)
+        wepPointers.Name = "wepPointers"
+        wepPointers.Size = New Size(58, 34)
+        wepPointers.TabIndex = 15
+        wepPointers.Visible = False
+        ' 
+        ' accPointers
+        ' 
+        accPointers.FormattingEnabled = True
+        accPointers.ItemHeight = 15
+        accPointers.Location = New Point(640, 219)
+        accPointers.Name = "accPointers"
+        accPointers.Size = New Size(58, 34)
+        accPointers.TabIndex = 14
+        accPointers.Visible = False
+        ' 
         ' wepAccSave
         ' 
-        wepAccSave.Location = New Point(415, 62)
+        wepAccSave.Location = New Point(434, 17)
         wepAccSave.Name = "wepAccSave"
         wepAccSave.Size = New Size(105, 30)
         wepAccSave.TabIndex = 12
@@ -1996,7 +2018,7 @@ Partial Class Form1
         ' accessoryComboBox
         ' 
         accessoryComboBox.FormattingEnabled = True
-        accessoryComboBox.Items.AddRange(New Object() {"Iron Bangle", "Silver Bangle", "Tungsten Bangle", "Titanium Bangle", "Gold Bangle", "Mythril Bangle", "Platinum Bangle", "Diamond Bangle", "Adamant Bangle", "Wurtzite Bangle", "Power Wristband", "Brawler's Wristband", "Warrior's Wristband", "Power Glove", "Kaiser Knuckles", "Magician's Mark", "Shaman's Mark", "Sorcerer's Mark", "Weirding Glyph", "Magistral Crest", "Black Belt", "General's Belt", "Champion's Belt", "Rune Bracelet", "Witch's Bracelet", "Magus's Bracelet", "Royal Armlet", "Imperial Armlet", "Ember Ring", "Blaze Ring", "Salamandrine Ring", "Frost Ring", "Icicle Ring", "Boreal Ring", "Spark Ring", "Fulmen Ring", "Raijin Ring", "Aqua Ring", "Riptide Ring", "Nereid Ring", "Zephyr Ring", "Gale Ring", "Sylphid Ring", "Clay Ring", "Siltstone Ring", "Gaian Ring", "Entite Ring", "Giant's Glove", "Warlord's Glove", "Glass Buckle", "Tektite Buckle", "Metal Armband", "Ceramic Armband", "Serenity Sachet", "Safeguard Sachet", "Glass Orb", "Dragonfly Orb", "Star Pendant", "Starfall Pendant", "Pearl Necklace", "Gemstone Necklace", "Warding Talisman", "Hexbane Talisman", "Pain Dampener", "Pain Deflector", "White Cape", "Effulgent Cape", "Rainbow Anklet", "Moonbow Anklet", "Cherub's Crown", "Seraph's Crown", "Ribbon", "Supper Ribbon", "Guardian Amulet", "Shield Talisman", "Auric Amulet", "Soulfont Talisman", "Watchman's Amulet", "Shrouding Talisman", "Hero's Amulet", "Morale Talisman", "Saint's Amulet", "Blessed Talisman", "Hermes Sandals", "Sprint Shoes", "Flamebane Brooch", "Flameshield Talisman", "Frostbane Brooch", "Frostshield Talisman", "Sparkbane Brooch", "Sparkshield Talisman", "Aquabane Brooch", "Aquashield Talisman", "Zealot's Amulet", "Battle Talisman", "Tetradic Crown", "Tetradic Tiara", "Whistlewind Scarf", "Aurora Scarf", "Nimbletoe Boots", "Collector Catalog", "Connoisseur Catalog", "Gold Watch", "Champion's Badge", "Survivalist Catalog", "Hunter's Friend", "Speed Sash", "Energy Sash", "Genji Glove", "Growth Egg", "Twenty-sided Die", "Fire Charm", "Ice Charm", "Lightning Charm", "Water Charm", "Wind Charm", "Earth Charm", "Doctor's Code"})
+        accessoryComboBox.Items.AddRange(New Object() {"Iron Bangle", "Silver Bangle", "Tungsten Bangle", "Titanium Bangle", "Gold Bangle", "Mythril Bangle", "Platinum Bangle", "Diamond Bangle", "Adamant Bangle", "Wurtzite Bangle", "Power Wristband", "Brawler's Wristband", "Warrior's Wristband", "Power Glove", "Kaiser Knuckles", "Magician's Mark", "Shaman's Mark", "Sorcerer's Mark", "Weirding Glyph", "Magistral Crest", "Black Belt", "General's Belt", "Champion's Belt", "Rune Bracelet", "Witch's Bracelet", "Magus's Bracelet", "Royal Armlet", "Imperial Armlet", "Ember Ring", "Blaze Ring", "Salamandrine Ring", "Frost Ring", "Icicle Ring", "Boreal Ring", "Spark Ring", "Fulmen Ring", "Raijin Ring", "Aqua Ring", "Riptide Ring", "Nereid Ring", "Zephyr Ring", "Gale Ring", "Sylphid Ring", "Clay Ring", "Siltstone Ring", "Gaian Ring", "Entite Ring", "Giant's Glove", "Warlord's Glove", "Glass Buckle", "Tektite Buckle", "Metal Armband", "Ceramic Armband", "Serenity Sachet", "Safeguard Sachet", "Glass Orb", "Dragonfly Orb", "Star Pendant", "Starfall Pendant", "Pearl Necklace", "Gemstone Necklace", "Warding Talisman", "Hexbane Talisman", "Pain Dampener", "Pain Deflector", "White Cape", "Effulgent Cape", "Rainbow Anklet", "Moonbow Anklet", "Cherub's Crown", "Seraph's Crown", "Ribbon", "Supper Ribbon", "Guardian Amulet", "Shield Talisman", "Auric Amulet", "Soulfont Talisman", "Watchman's Amulet", "Shrouding Talisman", "Hero's Amulet", "Morale Talisman", "Saint's Amulet", "Blessed Talisman", "Hermes Sandals", "Sprint Shoes", "Flamebane Brooch", "Flameshield Talisman", "Frostbane Brooch", "Frostshield Talisman", "Sparkbane Brooch", "Sparkshield Talisman", "Aquabane Brooch", "Aquashield Talisman", "Zealot's Amulet", "Battle Talisman", "Tetradic Crown", "Tetradic Tiara", "Whistlewind Scarf", "Aurora Scarf", "Nimbletoe Boots", "Collector Catalog", "Connoisseur Catalog", "Gold Watch", "Champion's Badge", "Survivalist Catalog", "Hunter's Friend", "Speed Sash", "Energy Sash", "Genji Glove", "Growth Egg", "Twenty-sided Die", "Fire Charm", "Ice Charm", "Lightning Charm", "Water Charm", "Wind Charm", "Earth Charm", "Doctor's Code", "Goddess's Favor"})
         accessoryComboBox.Location = New Point(245, 252)
         accessoryComboBox.Name = "accessoryComboBox"
         accessoryComboBox.Size = New Size(152, 23)
@@ -2005,7 +2027,7 @@ Partial Class Form1
         ' weaponComboBox
         ' 
         weaponComboBox.FormattingEnabled = True
-        weaponComboBox.Items.AddRange(New Object() {"Goddess's Favor", "Bladed Lance", "Glaive", "Dragoon Lance", "Dragonhorn", "Partisan", "Rhomphaia", "Shamanic Spear", "Heretic's Halberd", "Punisher", "Banescissor Spear", "Pandoran Spear", "Calamity Spear", "Taming Pole", "Venus Gospel", "Gae Bolg", "Gungnir", "Kain's Lance(Bladed Lance)", "Kain's Lance(Dragoon Lance)", "Kain's Lance(Partisan)", "Kain's Lance(Shamanic Spear)", "Kain's Lance(Punisher)", "Kain's Lance(Pandoran Spear)", "Kain's Lance(Taming Pole)", "Kain's Lance(Gae Bolg)", "Airwing", "Skycutter", "Hawkeye", "Eagletalon", "Otshirvani", "Urubutsin", "Ninurta", "Jatayu", "Vidofnir", "Hresvelgr", "Simurgh", "Tezcatlipoca", "Malphas", "Naberius", "Alicanto", "Caladrius", "Nue(Airwing)", "Nue(Hawkeye)", "Nue(Otshirvani)", "Nue(Ninurta)", "Nue(Vidofnir)", "Nue(Simurgh)", "Nue(Malphas)", "Nue(Alicanto)", "Blazefire Saber", "Flamberge", "Axis Blade", "Enkindler", "Edged Carbine", "Razor Carbine", "Lifesaber", "Peacemaker", "Gladius", "Helter-skelter", "Organyx", "Apocalypse", "Hauteclaire", "Durandal", "Lionheart", "Ultima Weapon", "Omega Weapon(Blazefire Saber)", "Omega Weapon(Axis Blade)", "Omega Weapon(Edged Carbine)", "Omega Weapon(Lifesaber)", "Omega Weapon(Gladius)", "Omega Weapon(Organyx)", "Omega Weapon(Hauteclaire)", "Omega Weapon(Lionheart)", "Vega 42s", "Altairs", "Spica Defenders", "Sirius Sidearms", "Deneb Duellers", "Canopus AMPs", "Rigels", "Polaris Specials", "Aldebarabs", "Sadalmeliks", "Pleiades Hi-Powers", "Hyades Magnums", "Antares Deluxes", "Fomalhaut Elites", "Procyons", "Betelgeuse Customs", "Total Eclipse(Vega 42s)", "Total Eclipse(Spica Defenders)", "Total Eclipse(Deneb Duellers)", "Total Eclipse(Rigels)", "Total Eclipse(Aldebarabs)", "Total Eclipse(Pleiades Hi-Powers)", "Total Eclipse(Antares Deluxes)", "Total Eclipse(Procyons)", "Wild Bear", "Feral Pride", "Paladin", "Winged Saint", "Rebel Heart", "Warrior's Emblem", "Power Circle", "Battle Standard", "Feymark", "Soul Blazer", "Sacrificial Circle", "Indomitus", "Unsetting Sun", "Midnight Sun", "Umbra", "Solaris", "Save the Queen(Wild Bear)", "Save the Queen(Paladin)", "Save the Queen(Rebel Heart)", "Save the Queen(Power Circle)", "Save the Queen(Feymark)", "Save the Queen(Sacrificial Circle)", "Save the Queen(Unsetting Sun)", "Save the Queen(Umbra)", "Binding Rod", "Hunter's Rod", "Tigerclaw", "Wyrmfang", "Healer's Staff", "Physician's Staff", "Pearlwing Staff", "Brightwing Staff", "Rod of Thorns", "Orochi Rod", "Mistilteinn", "Erinye's Cane", "Belladonna Wand", "Malboro Wand", "Heavenly Axis", "Abraxas", "Nirvana(Binding Rod)", "Nirvana(Tigerclaw)", "Nirvana(Healer's Staff)", "Nirvana(Pearlwing Staff)", "Nirvana(Rod of Thorns)", "Nirvana(Mistilteinn)", "Nirvana(Belladonna Wand)", "Nirvana(Heavenly Axis)"})
+        weaponComboBox.Items.AddRange(New Object() {"Bladed Lance", "Glaive", "Dragoon Lance", "Dragonhorn", "Partisan", "Rhomphaia", "Shamanic Spear", "Heretic's Halberd", "Punisher", "Banescissor Spear", "Pandoran Spear", "Calamity Spear", "Taming Pole", "Venus Gospel", "Gae Bolg", "Gungnir", "Kain's Lance(Bladed Lance)", "Kain's Lance(Dragoon Lance)", "Kain's Lance(Partisan)", "Kain's Lance(Shamanic Spear)", "Kain's Lance(Punisher)", "Kain's Lance(Pandoran Spear)", "Kain's Lance(Taming Pole)", "Kain's Lance(Gae Bolg)", "Airwing", "Skycutter", "Hawkeye", "Eagletalon", "Otshirvani", "Urubutsin", "Ninurta", "Jatayu", "Vidofnir", "Hresvelgr", "Simurgh", "Tezcatlipoca", "Malphas", "Naberius", "Alicanto", "Caladrius", "Nue(Airwing)", "Nue(Hawkeye)", "Nue(Otshirvani)", "Nue(Ninurta)", "Nue(Vidofnir)", "Nue(Simurgh)", "Nue(Malphas)", "Nue(Alicanto)", "Blazefire Saber", "Flamberge", "Axis Blade", "Enkindler", "Edged Carbine", "Razor Carbine", "Lifesaber", "Peacemaker", "Gladius", "Helter-skelter", "Organyx", "Apocalypse", "Hauteclaire", "Durandal", "Lionheart", "Ultima Weapon", "Omega Weapon(Blazefire Saber)", "Omega Weapon(Axis Blade)", "Omega Weapon(Edged Carbine)", "Omega Weapon(Lifesaber)", "Omega Weapon(Gladius)", "Omega Weapon(Organyx)", "Omega Weapon(Hauteclaire)", "Omega Weapon(Lionheart)", "Vega 42s", "Altairs", "Spica Defenders", "Sirius Sidearms", "Deneb Duellers", "Canopus AMPs", "Rigels", "Polaris Specials", "Aldebarabs", "Sadalmeliks", "Pleiades Hi-Powers", "Hyades Magnums", "Antares Deluxes", "Fomalhaut Elites", "Procyons", "Betelgeuse Customs", "Total Eclipse(Vega 42s)", "Total Eclipse(Spica Defenders)", "Total Eclipse(Deneb Duellers)", "Total Eclipse(Rigels)", "Total Eclipse(Aldebarabs)", "Total Eclipse(Pleiades Hi-Powers)", "Total Eclipse(Antares Deluxes)", "Total Eclipse(Procyons)", "Wild Bear", "Feral Pride", "Paladin", "Winged Saint", "Rebel Heart", "Warrior's Emblem", "Power Circle", "Battle Standard", "Feymark", "Soul Blazer", "Sacrificial Circle", "Indomitus", "Unsetting Sun", "Midnight Sun", "Umbra", "Solaris", "Save the Queen(Wild Bear)", "Save the Queen(Paladin)", "Save the Queen(Rebel Heart)", "Save the Queen(Power Circle)", "Save the Queen(Feymark)", "Save the Queen(Sacrificial Circle)", "Save the Queen(Unsetting Sun)", "Save the Queen(Umbra)", "Binding Rod", "Hunter's Rod", "Tigerclaw", "Wyrmfang", "Healer's Staff", "Physician's Staff", "Pearlwing Staff", "Brightwing Staff", "Rod of Thorns", "Orochi Rod", "Mistilteinn", "Erinye's Cane", "Belladonna Wand", "Malboro Wand", "Heavenly Axis", "Abraxas", "Nirvana(Binding Rod)", "Nirvana(Tigerclaw)", "Nirvana(Healer's Staff)", "Nirvana(Pearlwing Staff)", "Nirvana(Rod of Thorns)", "Nirvana(Mistilteinn)", "Nirvana(Belladonna Wand)", "Nirvana(Heavenly Axis)"})
         weaponComboBox.Location = New Point(14, 252)
         weaponComboBox.Name = "weaponComboBox"
         weaponComboBox.Size = New Size(208, 23)
@@ -2019,6 +2041,7 @@ Partial Class Form1
         AccInformation.Name = "AccInformation"
         AccInformation.Size = New Size(57, 34)
         AccInformation.TabIndex = 7
+        AccInformation.Visible = False
         ' 
         ' WepInformation
         ' 
@@ -2028,6 +2051,7 @@ Partial Class Form1
         WepInformation.Name = "WepInformation"
         WepInformation.Size = New Size(59, 34)
         WepInformation.TabIndex = 6
+        WepInformation.Visible = False
         ' 
         ' AccName
         ' 
@@ -2055,6 +2079,7 @@ Partial Class Form1
         AccBox.Name = "AccBox"
         AccBox.Size = New Size(58, 34)
         AccBox.TabIndex = 2
+        AccBox.Visible = False
         ' 
         ' WepBox
         ' 
@@ -2064,24 +2089,16 @@ Partial Class Form1
         WepBox.Name = "WepBox"
         WepBox.Size = New Size(58, 34)
         WepBox.TabIndex = 1
+        WepBox.Visible = False
         ' 
-        ' WepAccButton
+        ' ListBox10
         ' 
-        WepAccButton.Location = New Point(415, 17)
-        WepAccButton.Name = "WepAccButton"
-        WepAccButton.Size = New Size(105, 31)
-        WepAccButton.TabIndex = 0
-        WepAccButton.Text = "Test Sorting"
-        WepAccButton.UseVisualStyleBackColor = True
-        ' 
-        ' ListBox9
-        ' 
-        ListBox9.FormattingEnabled = True
-        ListBox9.ItemHeight = 15
-        ListBox9.Location = New Point(458, 135)
-        ListBox9.Name = "ListBox9"
-        ListBox9.Size = New Size(273, 94)
-        ListBox9.TabIndex = 13
+        ListBox10.FormattingEnabled = True
+        ListBox10.ItemHeight = 15
+        ListBox10.Location = New Point(437, 69)
+        ListBox10.Name = "ListBox10"
+        ListBox10.Size = New Size(324, 139)
+        ListBox10.TabIndex = 16
         ' 
         ' Form1
         ' 
@@ -2333,4 +2350,7 @@ Partial Class Form1
     Friend WithEvents addWeapon As Button
     Friend WithEvents wepAccSave As Button
     Friend WithEvents ListBox9 As ListBox
+    Friend WithEvents wepPointers As ListBox
+    Friend WithEvents accPointers As ListBox
+    Friend WithEvents ListBox10 As ListBox
 End Class

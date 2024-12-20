@@ -35,6 +35,362 @@ Public Class Form1
         Next
         Return text.ToString
     End Function
+    Function InventoryLoading()
+        ' Length of Weapon/Accessory Strings are 28 bytes total. Contains prefix - Wea or Acc.
+        ' Example of entry: wep_lig_001 or acc_000_001 followed by levels, exp, exp multiplier*
+        '* Not figured out order/Structure as of yet, however from testing this is in there. 
+
+        Dim weaponDictionary As New Dictionary(Of String, String) From {
+            {"wea_fan_001", "Bladed Lance"},
+            {"wea_fan_002", "Glaive"},
+            {"wea_fan_003", "Dragoon Lance"},
+            {"wea_fan_004", "Dragonhorn"},
+            {"wea_fan_005", "Partisan"},
+            {"wea_fan_006", "Rhomphaia"},
+            {"wea_fan_007", "Shamanic Spear"},
+            {"wea_fan_008", "Heretic's Halberd"},
+            {"wea_fan_009", "Punisher"},
+            {"wea_fan_010", "Banescissor Spear"},
+            {"wea_fan_011", "Pandoran Spear"},
+            {"wea_fan_012", "Calamity Spear"},
+            {"wea_fan_013", "Taming Pole"},
+            {"wea_fan_014", "Venus Gospel"},
+            {"wea_fan_015", "Gae Bolg"},
+            {"wea_fan_016", "Gungnir"},
+            {"wea_fan_017", "Kain's Lance(Bladed Lance)"},
+            {"wea_fan_018", "Kain's Lance(Dragoon Lance)"},
+            {"wea_fan_019", "Kain's Lance(Partisan)"},
+            {"wea_fan_020", "Kain's Lance(Shamanic Spear)"},
+            {"wea_fan_021", "Kain's Lance(Punisher)"},
+            {"wea_fan_022", "Kain's Lance(Pandoran Spear)"},
+            {"wea_fan_023", "Kain's Lance(Taming Pole)"},
+            {"wea_fan_024", "Kain's Lance(Gae Bolg)"},
+            {"wea_hop_001", "Airwing"},
+            {"wea_hop_002", "Skycutter"},
+            {"wea_hop_003", "Hawkeye"},
+            {"wea_hop_004", "Eagletalon"},
+            {"wea_hop_005", "Otshirvani"},
+            {"wea_hop_006", "Urubutsin"},
+            {"wea_hop_007", "Ninurta"},
+            {"wea_hop_008", "Jatayu"},
+            {"wea_hop_009", "Vidofnir"},
+            {"wea_hop_010", "Hresvelgr"},
+            {"wea_hop_011", "Simurgh"},
+            {"wea_hop_012", "Tezcatlipoca"},
+            {"wea_hop_013", "Malphas"},
+            {"wea_hop_014", "Naberius"},
+            {"wea_hop_015", "Alicanto"},
+            {"wea_hop_016", "Caladrius"},
+            {"wea_hop_017", "Nue(Airwing)"},
+            {"wea_hop_018", "Nue(Hawkeye)"},
+            {"wea_hop_019", "Nue(Otshirvani)"},
+            {"wea_hop_020", "Nue(Ninurta)"},
+            {"wea_hop_021", "Nue(Vidofnir)"},
+            {"wea_hop_022", "Nue(Simurgh)"},
+            {"wea_hop_023", "Nue(Malphas)"},
+            {"wea_hop_024", "Nue(Alicanto)"},
+            {"wea_lig_001", "Blazefire Saber"},
+            {"wea_lig_002", "Flamberge"},
+            {"wea_lig_003", "Axis Blade"},
+            {"wea_lig_004", "Enkindler"},
+            {"wea_lig_005", "Edged Carbine"},
+            {"wea_lig_006", "Razor Carbine"},
+            {"wea_lig_007", "Lifesaber"},
+            {"wea_lig_008", "Peacemaker"},
+            {"wea_lig_009", "Gladius"},
+            {"wea_lig_010", "Helter-skelter"},
+            {"wea_lig_011", "Organyx"},
+            {"wea_lig_012", "Apocalypse"},
+            {"wea_lig_013", "Hauteclaire"},
+            {"wea_lig_014", "Durandal"},
+            {"wea_lig_015", "Lionheart"},
+            {"wea_lig_016", "Ultima Weapon"},
+            {"wea_lig_017", "Omega Weapon(Blazefire Saber)"},
+            {"wea_lig_018", "Omega Weapon(Axis Blade)"},
+            {"wea_lig_019", "Omega Weapon(Edged Carbine)"},
+            {"wea_lig_020", "Omega Weapon(Lifesaber)"},
+            {"wea_lig_021", "Omega Weapon(Gladius)"},
+            {"wea_lig_022", "Omega Weapon(Organyx)"},
+            {"wea_lig_023", "Omega Weapon(Hauteclaire)"},
+            {"wea_lig_024", "Omega Weapon(Lionheart)"},
+            {"wea_saz_001", "Vega 42s"},
+            {"wea_saz_002", "Altairs"},
+            {"wea_saz_003", "Spica Defenders"},
+            {"wea_saz_004", "Sirius Sidearms"},
+            {"wea_saz_005", "Deneb Duellers"},
+            {"wea_saz_006", "Canopus AMPs"},
+            {"wea_saz_007", "Rigels"},
+            {"wea_saz_008", "Polaris Specials"},
+            {"wea_saz_009", "Aldebarabs"},
+            {"wea_saz_010", "Sadalmeliks"},
+            {"wea_saz_011", "Pleiades Hi-Powers"},
+            {"wea_saz_012", "Hyades Magnums"},
+            {"wea_saz_013", "Antares Deluxes"},
+            {"wea_saz_014", "Fomalhaut Elites"},
+            {"wea_saz_015", "Procyons"},
+            {"wea_saz_016", "Betelgeuse Customs"},
+            {"wea_saz_017", "Total Eclipse(Vega 42s)"},
+            {"wea_saz_018", "Total Eclipse(Spica Defenders)"},
+            {"wea_saz_019", "Total Eclipse(Deneb Duellers)"},
+            {"wea_saz_020", "Total Eclipse(Rigels)"},
+            {"wea_saz_021", "Total Eclipse(Aldebarabs)"},
+            {"wea_saz_022", "Total Eclipse(Pleiades Hi-Powers)"},
+            {"wea_saz_023", "Total Eclipse(Antares Deluxes)"},
+            {"wea_saz_024", "Total Eclipse(Procyons)"},
+            {"wea_sno_001", "Wild Bear"},
+            {"wea_sno_002", "Feral Pride"},
+            {"wea_sno_003", "Paladin"},
+            {"wea_sno_004", "Winged Saint"},
+            {"wea_sno_005", "Rebel Heart"},
+            {"wea_sno_006", "Warrior's Emblem"},
+            {"wea_sno_007", "Power Circle"},
+            {"wea_sno_008", "Battle Standard"},
+            {"wea_sno_009", "Feymark"},
+            {"wea_sno_010", "Soul Blazer"},
+            {"wea_sno_011", "Sacrificial Circle"},
+            {"wea_sno_012", "Indomitus"},
+            {"wea_sno_013", "Unsetting Sun"},
+            {"wea_sno_014", "Midnight Sun"},
+            {"wea_sno_015", "Umbra"},
+            {"wea_sno_016", "Solaris"},
+            {"wea_sno_017", "Save the Queen(Wild Bear)"},
+            {"wea_sno_018", "Save the Queen(Paladin)"},
+            {"wea_sno_019", "Save the Queen(Rebel Heart)"},
+            {"wea_sno_020", "Save the Queen(Power Circle)"},
+            {"wea_sno_021", "Save the Queen(Feymark)"},
+            {"wea_sno_022", "Save the Queen(Sacrificial Circle)"},
+            {"wea_sno_023", "Save the Queen(Unsetting Sun)"},
+            {"wea_sno_024", "Save the Queen(Umbra)"},
+            {"wea_van_001", "Binding Rod"},
+            {"wea_van_002", "Hunter's Rod"},
+            {"wea_van_003", "Tigerclaw"},
+            {"wea_van_004", "Wyrmfang"},
+            {"wea_van_005", "Healer's Staff"},
+            {"wea_van_006", "Physician's Staff"},
+            {"wea_van_007", "Pearlwing Staff"},
+            {"wea_van_008", "Brightwing Staff"},
+            {"wea_van_009", "Rod of Thorns"},
+            {"wea_van_010", "Orochi Rod"},
+            {"wea_van_011", "Mistilteinn"},
+            {"wea_van_012", "Erinye's Cane"},
+            {"wea_van_013", "Belladonna Wand"},
+            {"wea_van_014", "Malboro Wand"},
+            {"wea_van_015", "Heavenly Axis"},
+            {"wea_van_016", "Abraxas"},
+            {"wea_van_017", "Nirvana(Binding Rod)"},
+            {"wea_van_018", "Nirvana(Tigerclaw)"},
+            {"wea_van_019", "Nirvana(Healer's Staff)"},
+            {"wea_van_020", "Nirvana(Pearlwing Staff)"},
+            {"wea_van_021", "Nirvana(Rod of Thorns)"},
+            {"wea_van_022", "Nirvana(Mistilteinn)"},
+            {"wea_van_023", "Nirvana(Belladonna Wand)"},
+            {"wea_van_024", "Nirvana(Heavenly Axis)"}
+            }
+
+        Dim accessoryDictionary As New Dictionary(Of String, String) From {
+            {"acc_000_000", "Iron Bangle"},
+            {"acc_000_001", "Silver Bangle"},
+            {"acc_000_002", "Tungsten Bangle"},
+            {"acc_000_003", "Titanium Bangle"},
+            {"acc_000_004", "Gold Bangle"},
+            {"acc_000_005", "Mythril Bangle"},
+            {"acc_000_006", "Platinum Bangle"},
+            {"acc_000_007", "Diamond Bangle"},
+            {"acc_000_008", "Adamant Bangle"},
+            {"acc_000_009", "Wurtzite Bangle"},
+            {"acc_000_100", "Power Wristband"},
+            {"acc_000_101", "Brawler's Wristband"},
+            {"acc_000_102", "Warrior's Wristband"},
+            {"acc_000_103", "Power Glove"},
+            {"acc_000_104", "Kaiser Knuckles"},
+            {"acc_000_200", "Magician's Mark"},
+            {"acc_000_201", "Shaman's Mark"},
+            {"acc_000_202", "Sorcerer's Mark"},
+            {"acc_000_203", "Weirding Glyph"},
+            {"acc_000_204", "Magistral Crest"},
+            {"acc_000_300", "Black Belt"},
+            {"acc_000_301", "General's Belt"},
+            {"acc_000_302", "Champion's Belt"},
+            {"acc_000_400", "Rune Bracelet"},
+            {"acc_000_401", "Witch's Bracelet"},
+            {"acc_000_402", "Magus's Bracelet"},
+            {"acc_000_500", "Royal Armlet"},
+            {"acc_000_501", "Imperial Armlet"},
+            {"acc_001_000", "Ember Ring"},
+            {"acc_001_001", "Blaze Ring"},
+            {"acc_001_002", "Salamandrine Ring"},
+            {"acc_002_000", "Frost Ring"},
+            {"acc_002_001", "Icicle Ring"},
+            {"acc_002_002", "Boreal Ring"},
+            {"acc_003_000", "Spark Ring"},
+            {"acc_003_001", "Fulmen Ring"},
+            {"acc_003_002", "Raijin Ring"},
+            {"acc_004_000", "Aqua Ring"},
+            {"acc_004_001", "Riptide Ring"},
+            {"acc_004_002", "Nereid Ring"},
+            {"acc_005_000", "Zephyr Ring"},
+            {"acc_005_001", "Gale Ring"},
+            {"acc_005_002", "Sylphid Ring"},
+            {"acc_006_000", "Clay Ring"},
+            {"acc_006_001", "Siltstone Ring"},
+            {"acc_006_002", "Gaian Ring"},
+            {"acc_007_000", "Entite Ring"},
+            {"acc_009_000", "Giant's Glove"},
+            {"acc_009_001", "Warlord's Glove"},
+            {"acc_010_000", "Glass Buckle"},
+            {"acc_010_001", "Tektite Buckle"},
+            {"acc_011_000", "Metal Armband"},
+            {"acc_011_001", "Ceramic Armband"},
+            {"acc_012_000", "Serenity Sachet"},
+            {"acc_012_001", "Safeguard Sachet"},
+            {"acc_013_000", "Glass Orb"},
+            {"acc_013_001", "Dragonfly Orb"},
+            {"acc_014_000", "Star Pendant"},
+            {"acc_014_001", "Starfall Pendant"},
+            {"acc_015_000", "Pearl Necklace"},
+            {"acc_015_001", "Gemstone Necklace"},
+            {"acc_016_000", "Warding Talisman"},
+            {"acc_016_001", "Hexbane Talisman"},
+            {"acc_017_000", "Pain Dampener"},
+            {"acc_017_001", "Pain Deflector"},
+            {"acc_018_000", "White Cape"},
+            {"acc_018_001", "Effulgent Cape"},
+            {"acc_019_000", "Rainbow Anklet"},
+            {"acc_019_001", "Moonbow Anklet"},
+            {"acc_020_000", "Cherub's Crown"},
+            {"acc_020_001", "Seraph's Crown"},
+            {"acc_023_000", "Ribbon"},
+            {"acc_023_001", "Supper Ribbon"},
+            {"acc_025_000", "Guardian Amulet"},
+            {"acc_025_001", "Shield Talisman"},
+            {"acc_026_000", "Auric Amulet"},
+            {"acc_026_001", "Soulfont Talisman"},
+            {"acc_027_000", "Watchman's Amulet"},
+            {"acc_027_001", "Shrouding Talisman"},
+            {"acc_028_000", "Hero's Amulet"},
+            {"acc_028_001", "Morale Talisman"},
+            {"acc_029_000", "Saint's Amulet"},
+            {"acc_029_001", "Blessed Talisman"},
+            {"acc_030_000", "Hermes Sandals"},
+            {"acc_030_001", "Sprint Shoes"},
+            {"acc_031_000", "Flamebane Brooch"},
+            {"acc_031_001", "Flameshield Talisman"},
+            {"acc_032_000", "Frostbane Brooch"},
+            {"acc_032_001", "Frostshield Talisman"},
+            {"acc_033_000", "Sparkbane Brooch"},
+            {"acc_033_001", "Sparkshield Talisman"},
+            {"acc_034_000", "Aquabane Brooch"},
+            {"acc_034_001", "Aquashield Talisman"},
+            {"acc_035_000", "Zealot's Amulet"},
+            {"acc_035_001", "Battle Talisman"},
+            {"acc_036_000", "Tetradic Crown"},
+            {"acc_036_001", "Tetradic Tiara"},
+            {"acc_037_000", "Whistlewind Scarf"},
+            {"acc_037_001", "Aurora Scarf"},
+            {"acc_038_000", "Nimbletoe Boots"},
+            {"acc_039_000", "Collector Catalog"},
+            {"acc_039_001", "Connoisseur Catalog"},
+            {"acc_040_000", "Gold Watch"},
+            {"acc_040_001", "Champion's Badge"},
+            {"acc_040_002", "Survivalist Catalog"},
+            {"acc_041_000", "Hunter's Friend"},
+            {"acc_041_001", "Speed Sash"},
+            {"acc_041_002", "Energy Sash"},
+            {"acc_042_001", "Genji Glove"},
+            {"acc_045_000", "Growth Egg"},
+            {"acc_046_000", "Twenty-sided Die"},
+            {"acc_047_000", "Fire Charm"},
+            {"acc_048_000", "Ice Charm"},
+            {"acc_049_000", "Lightning Charm"},
+            {"acc_050_000", "Water Charm"},
+            {"acc_051_000", "Wind Charm"},
+            {"acc_052_000", "Earth Charm"},
+            {"acc_053_000", "Doctor's Code"},
+            {"acc_054_000", "Goddess's Favor"}
+            }
+
+
+        'Total Length = 14360 / 28 = ~ 512 entries of Weapons/Accessories. (+1 when moving to next entry so it starts at the next entry vs end of previous one.)
+
+        Dim filename As String = OpenFileDialog1.FileName ' Sets filename as string
+
+        Dim fs As New FileStream(filename, FileMode.Open) ' Opens the file and begins streaming
+
+        Dim br As New BinaryReader(fs) ' BinaryReader accesses File
+
+        Dim MyAddress As Long = 284176 ' Sets Offset Address 
+
+        fs.Seek(MyAddress, SeekOrigin.Begin)
+
+
+        Dim TotalEntries = 0
+
+        ' While Loop that pulls all of the data per entry. - Commented out incase other 
+
+        While TotalEntries < 512
+
+            fs.Seek(MyAddress, SeekOrigin.Begin)
+
+            Dim initialArraySize = 27
+
+            Dim Buffer() As Byte = New Byte(initialArraySize) {}
+
+            fs.Read(Buffer, 0, Buffer.Length)
+
+            Dim ItemString = Convert.ToHexString(Buffer)
+            If ItemString.Contains("776561") Then
+                WepBox.Items.Add(ItemString)
+            ElseIf ItemString.Contains("616363") Then
+                AccBox.Items.Add(ItemString)
+            End If
+
+            MyAddress += 28
+
+            TotalEntries += 1
+
+        End While
+
+        Dim weaponCounter = 0
+        Dim accessoryCounter = 0
+
+        While weaponCounter < WepBox.Items.Count()
+            Dim weaponIDItem = WepBox.Items.Item(weaponCounter)
+
+            Dim weaponIDText = weaponIDItem.ToString.Remove(22)
+            Dim weaponInformation = weaponIDItem.ToString.Remove(0, 22)
+
+            WepInformation.Items.Add(weaponInformation)
+
+            WepName.Items.Add(weaponDictionary.Item(HexToString(weaponIDText)))
+
+            weaponCounter += 1
+        End While
+
+        While accessoryCounter < AccBox.Items.Count()
+            Dim accIDItem = AccBox.Items.Item(accessoryCounter)
+
+            Dim accIDText = accIDItem.ToString.Remove(22)
+            Dim accessoryInformation = accIDItem.ToString.Remove(0, 22)
+
+            AccInformation.Items.Add(accessoryInformation)
+
+            AccName.Items.Add(accessoryDictionary.Item(HexToString(accIDText)))
+
+            accessoryCounter += 1
+        End While
+
+
+        ' Weapon/Accessory IDs have a length of 11. Will split the Identifier from the Weapon Information (Levels, Exp etc) and Display the name in a box, and hide the extra information.
+        ' Will create a default string that gives level 1 with 0 exp to any new added weapons until I add a level/exp changer.
+
+        ' While loop that Splits Identifier and Information.
+
+
+
+        fs.Close() : fs.Dispose()
+
+    End Function
+
     Function NumberGrabber(Address As Long, arraySize As Int16)
         Dim filename As String = OpenFileDialog1.FileName ' Sets filename as string
 
@@ -154,6 +510,8 @@ Public Class Form1
         If TabPage2.Visible() = True Then
             '' Area for preloading Party Editor config + Setting the defaults for it so when user clicks the tab its preloaded automatically and shows current party configuration.
             TabPage2.Show()
+
+            InventoryLoading()
 
             Dim CharacterDictionary As New Dictionary(Of String, Int64) From {
                 {"None", 0},
@@ -1637,361 +1995,6 @@ Public Class Form1
 
     End Sub
 
-    Private Sub WepAccButton_Click(sender As Object, e As EventArgs) Handles WepAccButton.Click
-        ' Length of Weapon/Accessory Strings are 28 bytes total. Contains prefix - Wea or Acc.
-        ' Example of entry: wep_lig_001 or acc_000_001 followed by levels, exp, exp multiplier*
-        '* Not figured out order/Structure as of yet, however from testing this is in there. 
-
-        Dim weaponDictionary As New Dictionary(Of String, String) From {
-            {"wea_fan_001", "Bladed Lance"},
-            {"wea_fan_002", "Glaive"},
-            {"wea_fan_003", "Dragoon Lance"},
-            {"wea_fan_004", "Dragonhorn"},
-            {"wea_fan_005", "Partisan"},
-            {"wea_fan_006", "Rhomphaia"},
-            {"wea_fan_007", "Shamanic Spear"},
-            {"wea_fan_008", "Heretic's Halberd"},
-            {"wea_fan_009", "Punisher"},
-            {"wea_fan_010", "Banescissor Spear"},
-            {"wea_fan_011", "Pandoran Spear"},
-            {"wea_fan_012", "Calamity Spear"},
-            {"wea_fan_013", "Taming Pole"},
-            {"wea_fan_014", "Venus Gospel"},
-            {"wea_fan_015", "Gae Bolg"},
-            {"wea_fan_016", "Gungnir"},
-            {"wea_fan_017", "Kain's Lance(Bladed Lance)"},
-            {"wea_fan_018", "Kain's Lance(Dragoon Lance)"},
-            {"wea_fan_019", "Kain's Lance(Partisan)"},
-            {"wea_fan_020", "Kain's Lance(Shamanic Spear)"},
-            {"wea_fan_021", "Kain's Lance(Punisher)"},
-            {"wea_fan_022", "Kain's Lance(Pandoran Spear)"},
-            {"wea_fan_023", "Kain's Lance(Taming Pole)"},
-            {"wea_fan_024", "Kain's Lance(Gae Bolg)"},
-            {"wea_hop_001", "Airwing"},
-            {"wea_hop_002", "Skycutter"},
-            {"wea_hop_003", "Hawkeye"},
-            {"wea_hop_004", "Eagletalon"},
-            {"wea_hop_005", "Otshirvani"},
-            {"wea_hop_006", "Urubutsin"},
-            {"wea_hop_007", "Ninurta"},
-            {"wea_hop_008", "Jatayu"},
-            {"wea_hop_009", "Vidofnir"},
-            {"wea_hop_010", "Hresvelgr"},
-            {"wea_hop_011", "Simurgh"},
-            {"wea_hop_012", "Tezcatlipoca"},
-            {"wea_hop_013", "Malphas"},
-            {"wea_hop_014", "Naberius"},
-            {"wea_hop_015", "Alicanto"},
-            {"wea_hop_016", "Caladrius"},
-            {"wea_hop_017", "Nue(Airwing)"},
-            {"wea_hop_018", "Nue(Hawkeye)"},
-            {"wea_hop_019", "Nue(Otshirvani)"},
-            {"wea_hop_020", "Nue(Ninurta)"},
-            {"wea_hop_021", "Nue(Vidofnir)"},
-            {"wea_hop_022", "Nue(Simurgh)"},
-            {"wea_hop_023", "Nue(Malphas)"},
-            {"wea_hop_024", "Nue(Alicanto)"},
-            {"wea_lig_001", "Blazefire Saber"},
-            {"wea_lig_002", "Flamberge"},
-            {"wea_lig_003", "Axis Blade"},
-            {"wea_lig_004", "Enkindler"},
-            {"wea_lig_005", "Edged Carbine"},
-            {"wea_lig_006", "Razor Carbine"},
-            {"wea_lig_007", "Lifesaber"},
-            {"wea_lig_008", "Peacemaker"},
-            {"wea_lig_009", "Gladius"},
-            {"wea_lig_010", "Helter-skelter"},
-            {"wea_lig_011", "Organyx"},
-            {"wea_lig_012", "Apocalypse"},
-            {"wea_lig_013", "Hauteclaire"},
-            {"wea_lig_014", "Durandal"},
-            {"wea_lig_015", "Lionheart"},
-            {"wea_lig_016", "Ultima Weapon"},
-            {"wea_lig_017", "Omega Weapon(Blazefire Saber)"},
-            {"wea_lig_018", "Omega Weapon(Axis Blade)"},
-            {"wea_lig_019", "Omega Weapon(Edged Carbine)"},
-            {"wea_lig_020", "Omega Weapon(Lifesaber)"},
-            {"wea_lig_021", "Omega Weapon(Gladius)"},
-            {"wea_lig_022", "Omega Weapon(Organyx)"},
-            {"wea_lig_023", "Omega Weapon(Hauteclaire)"},
-            {"wea_lig_024", "Omega Weapon(Lionheart)"},
-            {"wea_saz_001", "Vega 42s"},
-            {"wea_saz_002", "Altairs"},
-            {"wea_saz_003", "Spica Defenders"},
-            {"wea_saz_004", "Sirius Sidearms"},
-            {"wea_saz_005", "Deneb Duellers"},
-            {"wea_saz_006", "Canopus AMPs"},
-            {"wea_saz_007", "Rigels"},
-            {"wea_saz_008", "Polaris Specials"},
-            {"wea_saz_009", "Aldebarabs"},
-            {"wea_saz_010", "Sadalmeliks"},
-            {"wea_saz_011", "Pleiades Hi-Powers"},
-            {"wea_saz_012", "Hyades Magnums"},
-            {"wea_saz_013", "Antares Deluxes"},
-            {"wea_saz_014", "Fomalhaut Elites"},
-            {"wea_saz_015", "Procyons"},
-            {"wea_saz_016", "Betelgeuse Customs"},
-            {"wea_saz_017", "Total Eclipse(Vega 42s)"},
-            {"wea_saz_018", "Total Eclipse(Spica Defenders)"},
-            {"wea_saz_019", "Total Eclipse(Deneb Duellers)"},
-            {"wea_saz_020", "Total Eclipse(Rigels)"},
-            {"wea_saz_021", "Total Eclipse(Aldebarabs)"},
-            {"wea_saz_022", "Total Eclipse(Pleiades Hi-Powers)"},
-            {"wea_saz_023", "Total Eclipse(Antares Deluxes)"},
-            {"wea_saz_024", "Total Eclipse(Procyons)"},
-            {"wea_sno_001", "Wild Bear"},
-            {"wea_sno_002", "Feral Pride"},
-            {"wea_sno_003", "Paladin"},
-            {"wea_sno_004", "Winged Saint"},
-            {"wea_sno_005", "Rebel Heart"},
-            {"wea_sno_006", "Warrior's Emblem"},
-            {"wea_sno_007", "Power Circle"},
-            {"wea_sno_008", "Battle Standard"},
-            {"wea_sno_009", "Feymark"},
-            {"wea_sno_010", "Soul Blazer"},
-            {"wea_sno_011", "Sacrificial Circle"},
-            {"wea_sno_012", "Indomitus"},
-            {"wea_sno_013", "Unsetting Sun"},
-            {"wea_sno_014", "Midnight Sun"},
-            {"wea_sno_015", "Umbra"},
-            {"wea_sno_016", "Solaris"},
-            {"wea_sno_017", "Save the Queen(Wild Bear)"},
-            {"wea_sno_018", "Save the Queen(Paladin)"},
-            {"wea_sno_019", "Save the Queen(Rebel Heart)"},
-            {"wea_sno_020", "Save the Queen(Power Circle)"},
-            {"wea_sno_021", "Save the Queen(Feymark)"},
-            {"wea_sno_022", "Save the Queen(Sacrificial Circle)"},
-            {"wea_sno_023", "Save the Queen(Unsetting Sun)"},
-            {"wea_sno_024", "Save the Queen(Umbra)"},
-            {"wea_van_001", "Binding Rod"},
-            {"wea_van_002", "Hunter's Rod"},
-            {"wea_van_003", "Tigerclaw"},
-            {"wea_van_004", "Wyrmfang"},
-            {"wea_van_005", "Healer's Staff"},
-            {"wea_van_006", "Physician's Staff"},
-            {"wea_van_007", "Pearlwing Staff"},
-            {"wea_van_008", "Brightwing Staff"},
-            {"wea_van_009", "Rod of Thorns"},
-            {"wea_van_010", "Orochi Rod"},
-            {"wea_van_011", "Mistilteinn"},
-            {"wea_van_012", "Erinye's Cane"},
-            {"wea_van_013", "Belladonna Wand"},
-            {"wea_van_014", "Malboro Wand"},
-            {"wea_van_015", "Heavenly Axis"},
-            {"wea_van_016", "Abraxas"},
-            {"wea_van_017", "Nirvana(Binding Rod)"},
-            {"wea_van_018", "Nirvana(Tigerclaw)"},
-            {"wea_van_019", "Nirvana(Healer's Staff)"},
-            {"wea_van_020", "Nirvana(Pearlwing Staff)"},
-            {"wea_van_021", "Nirvana(Rod of Thorns)"},
-            {"wea_van_022", "Nirvana(Mistilteinn)"},
-            {"wea_van_023", "Nirvana(Belladonna Wand)"},
-            {"wea_van_024", "Nirvana(Heavenly Axis)"}
-            }
-
-        Dim accessoryDictionary As New Dictionary(Of String, String) From {
-            {"acc_000_000", "Iron Bangle"},
-            {"acc_000_001", "Silver Bangle"},
-            {"acc_000_002", "Tungsten Bangle"},
-            {"acc_000_003", "Titanium Bangle"},
-            {"acc_000_004", "Gold Bangle"},
-            {"acc_000_005", "Mythril Bangle"},
-            {"acc_000_006", "Platinum Bangle"},
-            {"acc_000_007", "Diamond Bangle"},
-            {"acc_000_008", "Adamant Bangle"},
-            {"acc_000_009", "Wurtzite Bangle"},
-            {"acc_000_100", "Power Wristband"},
-            {"acc_000_101", "Brawler's Wristband"},
-            {"acc_000_102", "Warrior's Wristband"},
-            {"acc_000_103", "Power Glove"},
-            {"acc_000_104", "Kaiser Knuckles"},
-            {"acc_000_200", "Magician's Mark"},
-            {"acc_000_201", "Shaman's Mark"},
-            {"acc_000_202", "Sorcerer's Mark"},
-            {"acc_000_203", "Weirding Glyph"},
-            {"acc_000_204", "Magistral Crest"},
-            {"acc_000_300", "Black Belt"},
-            {"acc_000_301", "General's Belt"},
-            {"acc_000_302", "Champion's Belt"},
-            {"acc_000_400", "Rune Bracelet"},
-            {"acc_000_401", "Witch's Bracelet"},
-            {"acc_000_402", "Magus's Bracelet"},
-            {"acc_000_500", "Royal Armlet"},
-            {"acc_000_501", "Imperial Armlet"},
-            {"acc_001_000", "Ember Ring"},
-            {"acc_001_001", "Blaze Ring"},
-            {"acc_001_002", "Salamandrine Ring"},
-            {"acc_002_000", "Frost Ring"},
-            {"acc_002_001", "Icicle Ring"},
-            {"acc_002_002", "Boreal Ring"},
-            {"acc_003_000", "Spark Ring"},
-            {"acc_003_001", "Fulmen Ring"},
-            {"acc_003_002", "Raijin Ring"},
-            {"acc_004_000", "Aqua Ring"},
-            {"acc_004_001", "Riptide Ring"},
-            {"acc_004_002", "Nereid Ring"},
-            {"acc_005_000", "Zephyr Ring"},
-            {"acc_005_001", "Gale Ring"},
-            {"acc_005_002", "Sylphid Ring"},
-            {"acc_006_000", "Clay Ring"},
-            {"acc_006_001", "Siltstone Ring"},
-            {"acc_006_002", "Gaian Ring"},
-            {"acc_007_000", "Entite Ring"},
-            {"acc_009_000", "Giant's Glove"},
-            {"acc_009_001", "Warlord's Glove"},
-            {"acc_010_000", "Glass Buckle"},
-            {"acc_010_001", "Tektite Buckle"},
-            {"acc_011_000", "Metal Armband"},
-            {"acc_011_001", "Ceramic Armband"},
-            {"acc_012_000", "Serenity Sachet"},
-            {"acc_012_001", "Safeguard Sachet"},
-            {"acc_013_000", "Glass Orb"},
-            {"acc_013_001", "Dragonfly Orb"},
-            {"acc_014_000", "Star Pendant"},
-            {"acc_014_001", "Starfall Pendant"},
-            {"acc_015_000", "Pearl Necklace"},
-            {"acc_015_001", "Gemstone Necklace"},
-            {"acc_016_000", "Warding Talisman"},
-            {"acc_016_001", "Hexbane Talisman"},
-            {"acc_017_000", "Pain Dampener"},
-            {"acc_017_001", "Pain Deflector"},
-            {"acc_018_000", "White Cape"},
-            {"acc_018_001", "Effulgent Cape"},
-            {"acc_019_000", "Rainbow Anklet"},
-            {"acc_019_001", "Moonbow Anklet"},
-            {"acc_020_000", "Cherub's Crown"},
-            {"acc_020_001", "Seraph's Crown"},
-            {"acc_023_000", "Ribbon"},
-            {"acc_023_001", "Supper Ribbon"},
-            {"acc_025_000", "Guardian Amulet"},
-            {"acc_025_001", "Shield Talisman"},
-            {"acc_026_000", "Auric Amulet"},
-            {"acc_026_001", "Soulfont Talisman"},
-            {"acc_027_000", "Watchman's Amulet"},
-            {"acc_027_001", "Shrouding Talisman"},
-            {"acc_028_000", "Hero's Amulet"},
-            {"acc_028_001", "Morale Talisman"},
-            {"acc_029_000", "Saint's Amulet"},
-            {"acc_029_001", "Blessed Talisman"},
-            {"acc_030_000", "Hermes Sandals"},
-            {"acc_030_001", "Sprint Shoes"},
-            {"acc_031_000", "Flamebane Brooch"},
-            {"acc_031_001", "Flameshield Talisman"},
-            {"acc_032_000", "Frostbane Brooch"},
-            {"acc_032_001", "Frostshield Talisman"},
-            {"acc_033_000", "Sparkbane Brooch"},
-            {"acc_033_001", "Sparkshield Talisman"},
-            {"acc_034_000", "Aquabane Brooch"},
-            {"acc_034_001", "Aquashield Talisman"},
-            {"acc_035_000", "Zealot's Amulet"},
-            {"acc_035_001", "Battle Talisman"},
-            {"acc_036_000", "Tetradic Crown"},
-            {"acc_036_001", "Tetradic Tiara"},
-            {"acc_037_000", "Whistlewind Scarf"},
-            {"acc_037_001", "Aurora Scarf"},
-            {"acc_038_000", "Nimbletoe Boots"},
-            {"acc_039_000", "Collector Catalog"},
-            {"acc_039_001", "Connoisseur Catalog"},
-            {"acc_040_000", "Gold Watch"},
-            {"acc_040_001", "Champion's Badge"},
-            {"acc_040_002", "Survivalist Catalog"},
-            {"acc_041_000", "Hunter's Friend"},
-            {"acc_041_001", "Speed Sash"},
-            {"acc_041_002", "Energy Sash"},
-            {"acc_042_001", "Genji Glove"},
-            {"acc_045_000", "Growth Egg"},
-            {"acc_046_000", "Twenty-sided Die"},
-            {"acc_047_000", "Fire Charm"},
-            {"acc_048_000", "Ice Charm"},
-            {"acc_049_000", "Lightning Charm"},
-            {"acc_050_000", "Water Charm"},
-            {"acc_051_000", "Wind Charm"},
-            {"acc_052_000", "Earth Charm"},
-            {"acc_053_000", "Doctor's Code"},
-            {"acc_054_000", "Goddess's Favor"}
-            }
-
-
-        'Total Length = 14360 / 28 = ~ 512 entries of Weapons/Accessories. (+1 when moving to next entry so it starts at the next entry vs end of previous one.)
-
-        Dim filename As String = OpenFileDialog1.FileName ' Sets filename as string
-
-        Dim fs As New FileStream(filename, FileMode.Open) ' Opens the file and begins streaming
-
-        Dim br As New BinaryReader(fs) ' BinaryReader accesses File
-
-        Dim MyAddress As Long = 284176 ' Sets Offset Address 
-
-        fs.Seek(MyAddress, SeekOrigin.Begin)
-
-
-        Dim TotalEntries = 0
-
-        ' While Loop that pulls all of the data per entry. - Commented out incase other 
-
-        While TotalEntries < 512
-
-            fs.Seek(MyAddress, SeekOrigin.Begin)
-
-            Dim initialArraySize = 27
-
-            Dim Buffer() As Byte = New Byte(initialArraySize) {}
-
-            fs.Read(Buffer, 0, Buffer.Length)
-
-            Dim ItemString = Convert.ToHexString(Buffer)
-            If ItemString.Contains("776561") Then
-                WepBox.Items.Add(ItemString)
-            ElseIf ItemString.Contains("616363") Then
-                AccBox.Items.Add(ItemString)
-            End If
-
-            MyAddress += 28
-
-            TotalEntries += 1
-
-        End While
-
-        Dim weaponCounter = 0
-        Dim accessoryCounter = 0
-
-        While weaponCounter < WepBox.Items.Count()
-            Dim weaponIDItem = WepBox.Items.Item(weaponCounter)
-
-            Dim weaponIDText = weaponIDItem.ToString.Remove(22)
-            Dim weaponInformation = weaponIDItem.ToString.Remove(0, 22)
-
-            WepInformation.Items.Add(weaponInformation)
-
-            WepName.Items.Add(weaponDictionary.Item(HexToString(weaponIDText)))
-
-            weaponCounter += 1
-        End While
-
-        While accessoryCounter < AccBox.Items.Count()
-            Dim accIDItem = AccBox.Items.Item(accessoryCounter)
-
-            Dim accIDText = accIDItem.ToString.Remove(22)
-            Dim accessoryInformation = accIDItem.ToString.Remove(0, 22)
-
-            AccInformation.Items.Add(accessoryInformation)
-
-            AccName.Items.Add(accessoryDictionary.Item(HexToString(accIDText)))
-
-            accessoryCounter += 1
-        End While
-
-
-        ' Weapon/Accessory IDs have a length of 11. Will split the Identifier from the Weapon Information (Levels, Exp etc) and Display the name in a box, and hide the extra information.
-        ' Will create a default string that gives level 1 with 0 exp to any new added weapons until I add a level/exp changer.
-
-        ' While loop that Splits Identifier and Information.
-
-
-
-        fs.Close() : fs.Dispose()
-
-    End Sub
 
     Private Sub AddWeapon_Click(sender As Object, e As EventArgs) Handles addWeapon.Click
 
@@ -2344,16 +2347,46 @@ Public Class Form1
             ''' CODE FOR POINTING TO WEAPONS GOES HERE
             '''
 
-            Dim pointerString1 = "0000000_00000"
-            Dim pointerMiddle = Hex(itemNumber + 1)
-            If pointerMiddle.Length < 4 Then
-                pointerMiddle = "00" & pointerMiddle
+            fs.Seek(weaponInventoryOffset, SeekOrigin.Begin)
+
+            Dim pointerMiddle As String = Hex(itemNumber)
+
+            pointerMiddle = StringToHex(pointerMiddle)
+
+
+            While pointerMiddle.Length < 4
+                pointerMiddle = "0" & pointerMiddle
+            End While
+
+            While pointerMiddle.Length < 6
+                pointerMiddle = "30" & pointerMiddle
+            End While
+
+            wepPointers.Items.Add("303030303030305F30303030" & pointerMiddle & "0000000001")
+
+
+
+            Dim pointerString = wepPointers.Items.Item(weaponCounter)
+
+            If pointerString.Length Mod 2 <> 0 Then pointerString = pointerString.Insert(0, "0")
+
+            Dim Length2 As Integer = pointerString.Length
+            Dim upperBound2 As Integer = Length2 \ 2
+            If Length2 Mod 2 = 0 Then
+                upperBound2 -= 1
+            Else
+                pointerString = "0" & pointerString
+
             End If
-            Dim pointerString2 = "000000000001"
 
+            ReDim Bytes(upperBound2)
+            For i As Integer = 0 To upperBound2
+                Bytes(i) = Convert.ToByte(pointerString.Substring(i * 2, 2), 16)
+            Next
 
-            Dim completePointerString As String = (StringToHex(pointerString1) & pointerMiddle & pointerString2)
+            fs.Write(Bytes, 0, Bytes.Length)
 
+            weaponInventoryOffset += 20
             weaponCounter += 1
             itemNumber += 1
 
@@ -2361,7 +2394,7 @@ Public Class Form1
 
         Dim accessoryCounter = 0
 
-        While accessoryCounter < WepBox.Items.Count
+        While accessoryCounter < AccBox.Items.Count
 
             fs.Seek(inventoryOffset, SeekOrigin.Begin)
 
@@ -2389,19 +2422,47 @@ Public Class Form1
             '''
             ''' CODE FOR POINTING TO ACCESSORIES GOES HERE
             '''
+            fs.Seek(accessoryInventoryOffset, SeekOrigin.Begin)
 
-            Dim pointerString1 = "303030303030305F3030303030"
-            Dim pointerMiddle = Hex(itemNumber + 1)
-            If pointerMiddle.Length < 4 Then
+            Dim pointerMiddle As String = Hex(itemNumber)
+
+            pointerMiddle = StringToHex(pointerMiddle)
+
+
+            While pointerMiddle.Length < 4
                 pointerMiddle = "0" & pointerMiddle
-            End If
-            Dim pointerString2 = "0000000001"
+            End While
 
-            Dim completePointerString = pointerString1 & pointerMiddle & pointerString2
+            While pointerMiddle.Length < 6
+                pointerMiddle = "30" & pointerMiddle
+            End While
+
+            accPointers.Items.Add("303030303030305F30303030" & pointerMiddle & "0000000001")
+
+
+            Dim pointerString = accPointers.Items.Item(accessoryCounter)
+
+            If pointerString.Length Mod 2 <> 0 Then pointerString = pointerString.Insert(0, "0")
+
+            Dim Length2 As Integer = pointerString.Length
+            Dim upperBound2 As Integer = Length2 \ 2
+            If Length2 Mod 2 = 0 Then
+                upperBound2 -= 1
+            Else
+                pointerString = "0" & pointerString
+
+            End If
+
+            ReDim Bytes(upperBound2)
+            For i As Integer = 0 To upperBound2
+                Bytes(i) = Convert.ToByte(pointerString.Substring(i * 2, 2), 16)
+            Next
+
+            fs.Write(Bytes, 0, Bytes.Length)
 
             accessoryCounter += 1
+            accessoryInventoryOffset += 20
             itemNumber += 1
-
         End While
 
 
